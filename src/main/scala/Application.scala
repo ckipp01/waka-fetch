@@ -1,6 +1,9 @@
 object Application {
   def main(args: Array[String]): Unit = {
-      println(args.head)
+      ArgumentParser.parse(args) match {
+        case None => ()
+        case Some(conf) => println(conf)
+      }
   }
 }
 
