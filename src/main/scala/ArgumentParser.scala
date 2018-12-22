@@ -4,7 +4,7 @@ object ArgumentParser {
 
   case class Config(
       user: String = "",
-      apiKeyLocation: File = new File("."),
+      apiKeyFile: ApiKeyFile = ApiKeyFile(new File(".")),
       startDate: String = "",
       endDate: String = "")
 
@@ -21,7 +21,7 @@ object ArgumentParser {
     opt[File]('l',"apiLocation")
       .required
       .valueName("Api Key Location")
-      .action((f, c) => c.copy(apiKeyLocation = f))
+      .action((f, c) => c.copy(apiKeyFile = ApiKeyFile(f)))
 
     opt[String]('s', "startDate")
       .required
