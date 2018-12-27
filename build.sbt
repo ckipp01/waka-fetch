@@ -6,5 +6,6 @@ scalaVersion := "2.12.8"
 
 libraryDependencies ++= Seq(
   "com.github.scopt" %% "scopt" % "3.7.1",
+  "org.mongodb.scala" %% "mongo-scala-driver" % "2.5.0",
   "org.scalaj" %% "scalaj-http" % "2.4.1"
 )

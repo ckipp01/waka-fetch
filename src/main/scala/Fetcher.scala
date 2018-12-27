@@ -11,10 +11,11 @@ object Fetcher {
       Http(Waka.baseUrl + user + Waka.summaries)
         .params(Seq((Waka.startParam, startDate), (Waka.endParam, endDate), (Waka.apiKeyParam, apiKey))).asString
 
-    if (response.is2xx) {
-      Some(response)
-    } else {
-      None
+    println(response.code)
+    response.code match {
+      case 200 => Some(response)
+      case 400 => Some(response)
+      case _ => None
     }
   }
 }
