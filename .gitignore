@@ -1,23 +1,3 @@
-*.class
-*.log
-
-# idea
-*.iml
-*.ipr
-*.iws
-.idea
-.idea_modules
-out
-
-# sbt
-dist/*
-target/
-lib_managed/
-src_managed/
-project/boot/
-project/plugins/project/
-
-# vim
-.*.swp
-.*.swo
-.metals/
+node_modules/
+*.swp
+now.json
