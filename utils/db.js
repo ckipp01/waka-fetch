@@ -3,20 +3,22 @@
 const MongoClient = require('mongodb').MongoClient
 const assert = require('assert')
 
-const dbName = process.env.DB_NAME
-const collectionName = process.env.DB_COLLECTION 
-const url = process.env.DB_URL 
+const mongo = {
+  name: process.env.DB_NAME,
+  collection: process.env.DB_COLLECTION,
+  url: process.env.DB_URL 
+}
 
 const storeSummary = summary => {
   return new Promise((resolve, reject) => {
-    const client = new MongoClient(url, { useNewUrlParser: true })
+    const client = new MongoClient(mongo.url, { useNewUrlParser: true })
 
     client.connect((err) => {
       assert.equal(null, err)
-      console.info('Connected successfully to server')
-      const db = client.db(dbName)
+      console.info('Connected successfully to server to store summary')
+      const db = client.db(mongo.name)
 
-      insertDocument(db, collectionName, summary)
+      insertDocument(db, mongo.collection, summary)
         .then(result => {
           client.close()
           resolve(result)
@@ -43,4 +45,30 @@ const insertDocument = (db, collectionName, summary) => {
   })
 }
 
-module.exports.storeSummary = storeSummary 
+const checkDate = (date) => {
+  return new Promise((resolve, reject) => {
+    const client = new MongoClient(mongo.url, { useNewUrlParser: true })
+    const query = { "data.range.date": date }
+    client.connect((err) => {
+      assert.equal(null, err)
+      console.info('Connected successfully to server to check date')
+      const db = client.db(mongo.name)
+      db.collection(mongo.collection)
+        .find(query)
+        .toArray((err, result) => {
+          client.close() 
+          if (err) {
+            client.close() 
+            reject(err)
+          } else {
+            if (result.length > 0) {
+              reject("This date is already stored") 
+            }
+            resolve(result)
+          }
+        })
+    })
+  })
+}
+
+module.exports = { storeSummary: storeSummary, checkDate: checkDate }

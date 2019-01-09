@@ -8,10 +8,9 @@ const waka = {
   apiKey: process.env.WAKA_API_KEY
 }
 
-const fetchWaka = () => {
+const fetchWaka = (date) => {
   return new Promise((resolve, reject) => {
-    console.info('Preparing request')
-    const date = createDate()
+    console.info(`Preparing request for ${date}`)
     const url = `${waka.baseUrl}users/${waka.user}/summaries/?start=${date}&end=${date}&api_key=${waka.apiKey}`
 
     https.get(url, (resp) => {
@@ -26,14 +25,6 @@ const fetchWaka = () => {
       reject(err)
     })
   })
-}
-
-const createDate = () => {
-  const d = new Date(),
-    month = '' + (d.getMonth() + 1),
-    day = '' + d.getDate(),
-    year = d.getFullYear()
-  return `${year}-${month}-${day}`
 }
 
 module.exports.fetchWaka = fetchWaka

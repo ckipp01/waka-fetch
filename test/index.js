@@ -1,3 +1,9 @@
 const test = require('../index.js')
 
-test()
+const fakeReq = {
+  headers: {
+    authorization: 'test'
+  }
+}
+
+test(fakeReq)
