@@ -6,7 +6,7 @@ const createDate = () => {
   return `${formatDateItem(year)}-${formatDateItem(month)}-${formatDateItem(day)}`
 }
 
-const formatDateItem = (num) => {
+const formatDateItem = num => {
   if (num < 10) {
     return '0' + num
   } else {

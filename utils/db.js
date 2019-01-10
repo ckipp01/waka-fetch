@@ -4,9 +4,9 @@ const MongoClient = require('mongodb').MongoClient
 const assert = require('assert')
 
 const mongo = {
-  name: process.env.DB_NAME,
-  collection: process.env.DB_COLLECTION,
-  url: process.env.DB_URL 
+  name: process.env.WAKA_FETCH_DB_NAME,
+  collection: process.env.WAKA_FETCH_DB_COLLECTION,
+  url: process.env.WAKA_FETCH_DB_URL 
 }
 
 const storeSummary = summary => {

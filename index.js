@@ -11,7 +11,6 @@ const makeRequest = async () => {
     const summary = await fetcher.fetchWaka(date)
     console.info('Summary successfully fetched')
     await db.storeSummary(summary)
-    console.info('Summary successfully stored') 
     console.timeEnd('waka-fetch')
   } catch (err) {
     console.error(err)
@@ -21,8 +20,15 @@ const makeRequest = async () => {
 module.exports = (req, res) => {
   console.time('waka-fetch')
   if (process.env.ENV === 'live' && req.headers.authorization !== process.env.WAKA_FETCH_AUTH) {
-    res.status(401).send('Authentication required.')
+    res.end('Authentication required.')
   } else {
     makeRequest()
+      .then(r => {
+        if (process.env.ENV === 'live') {
+          res.end('Summary successfully stored')
+        } else {
+          console.info('Summary successfully stored') 
+        }
+      })
   }
 }
