@@ -12,6 +12,7 @@ const makeRequest = async () => {
     console.info('Summary successfully fetched')
     await db.storeSummary(summary)
     console.timeEnd('waka-fetch')
+    return 'Summary successfully stored'
   } catch (err) {
     console.error(err)
   }
@@ -25,9 +26,10 @@ module.exports = (req, res) => {
     makeRequest()
       .then(r => {
         if (process.env.ENV === 'live') {
-          res.end('Summary successfully stored')
+          console.info(r)
+          res.end(r)
         } else {
-          console.info('Summary successfully stored') 
+          console.info(r) 
         }
       })
   }
