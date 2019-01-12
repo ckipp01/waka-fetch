@@ -20,7 +20,7 @@ const makeRequest = async () => {
 
 module.exports = (req, res) => {
   console.time('waka-fetch')
-  if (process.env.ENV === 'live' && req.headers.authorization !== process.env.WAKA_FETCH_AUTH) {
+  if (process.env.NODE_ENV === 'production' && req.headers.authorization !== process.env.WAKA_FETCH_AUTH) {
     res.end('Authentication required.')
   } else {
     makeRequest()
