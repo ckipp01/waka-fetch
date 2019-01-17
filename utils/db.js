@@ -71,4 +71,4 @@ const checkDate = (date) => {
   })
 }
 
-module.exports = { storeSummary: storeSummary, checkDate: checkDate }
+module.exports = { storeSummary, checkDate }

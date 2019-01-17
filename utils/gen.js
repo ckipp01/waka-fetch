@@ -14,4 +14,4 @@ const formatDateItem = num => {
   }
 }
 
-module.exports.createDate = createDate
+module.exports = { createDate }

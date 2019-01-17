@@ -27,4 +27,4 @@ const fetchWaka = (date) => {
   })
 }
 
-module.exports.fetchWaka = fetchWaka
+module.exports = { fetchWaka }
