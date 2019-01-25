@@ -4,8 +4,7 @@
   "description": "Serverless tool to fetch daily waka summaries and store them.",
   "main": "index.js",
   "author": "Chris Kipp",
-  "license": "MIT",
   "dependencies": {
-    "mongodb": "^3.1.10"
+    "mongodb": "3.1.10"
   }
 }
