@@ -1,16 +1,16 @@
 'use strict'
 
-const fetcher = require('./utils/fetch.js')
-const db = require('./utils/db.js')
-const helper = require('./utils/gen.js')
+const { fetchWaka }= require('./utils/fetch.js')
+const { checkDate, storeSummary } = require('./utils/db.js')
+const { createDate } = require('./utils/gen.js')
 
 const makeRequest = async () => {
   try {
-    const date = helper.createDate()
-    await db.checkDate(date)
-    const summary = await fetcher.fetchWaka(date)
+    const date = createDate()
+    await checkDate(date)
+    const summary = await fetchWaka(date)
     console.info('Summary successfully fetched')
-    await db.storeSummary(summary)
+    await storeSummary(summary)
     console.timeEnd('waka-fetch')
     return 'Summary successfully stored'
   } catch (err) {
@@ -24,12 +24,12 @@ module.exports = (req, res) => {
     res.end('Authentication required.')
   } else {
     makeRequest()
-      .then(r => {
+      .then(response => {
         if (process.env.NODE_ENV === 'production') {
-          console.info(r)
-          res.end(r)
+          console.info(response)
+          res.end(response)
         } else {
-          console.info(r) 
+          console.info(response) 
         }
       })
       .catch(err => {
