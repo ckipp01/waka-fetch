@@ -2,3 +2,4 @@ node_modules/
 *.swp
 now.json
 .nowignore
+.env
