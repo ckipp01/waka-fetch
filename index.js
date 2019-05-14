@@ -27,11 +27,13 @@ module.exports = (req, res) => {
     makeRequest()
       .then(response => {
         console.info(response)
+        console.timeEnd('waka-fetch')
         res.writeHead(300, { 'Content-Type': 'text/plain' })
         res.end(response)
       })
       .catch(err => {
         console.error(err)
+        console.timeEnd('waka-fetch')
         res.writeHead(400, { 'Content-Type': 'text/plain' })
         res.end('Sorry something went wrong with your request.')
       })
