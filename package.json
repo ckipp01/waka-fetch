@@ -5,9 +5,9 @@
   "main": "index.js",
   "author": "Chris Kipp",
   "dependencies": {
-    "mongodb": "3.2.7"
+    "mongodb": "3.3.2"
   },
   "devDependencies": {
-    "eslint": "^6.2.2"
+    "eslint": "6.4.0"
   }
 }
